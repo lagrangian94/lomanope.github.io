@@ -4,9 +4,9 @@ main:
   #  url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
    - title: "About"
      url: https://lomanope.github.io/about/first-post/
-   - title: "Sample Posts"
-     url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
+   - title: "Optimization"
+     url: /optimization/
+   - title: "Statistical Learning"
+     url: /statistical_learning/
   # - title: "Sitemap"
   #   url: /sitemap/
