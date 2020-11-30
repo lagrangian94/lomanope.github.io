@@ -275,13 +275,16 @@ defaults:
       path: ""
       type: posts
     values:
+      sidebar:
+        nav: "posts"
       layout: single
       author_profile: true
       read_time: true
       comments: true
       share: true
       related: true
-      
+      toc: true
+      toc_sticky: true
   # _pages
   - scope:
       path: ""
@@ -293,11 +296,5 @@ defaults:
       comments: false
       share: true
       related: false
-      
-  # _docs
-  - scope:
-      path: ""
-      type: docs
-    values:
       sidebar:
-        nav: "docs"
+        nav: "posts"

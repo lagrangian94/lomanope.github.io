@@ -5,7 +5,9 @@ permalink : /about/
 layout : single
 ---
 
-I made this blog to write down what I studied, especially focused on the field of Operations Research.
+I made this blog to write down what I've studied, mainly focused on the field of Operations Research.  
+
+Currently, my main interest is *Decision Making(Optimization) Under Unceratiny*, such as *Robust Optimization*.  
 
 Hope this blog might help not only my research, but also any visitors who want to know about Mathematical Optimization.
 

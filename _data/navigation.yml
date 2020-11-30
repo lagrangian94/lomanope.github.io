@@ -8,34 +8,21 @@ main:
      url: /categories/
    - title: "Tags"
      url: /tags/
-   
-  # - title: "Sitemap"
-  #   url: /sitemap/
 
-
-
-
-
-#Sidebar
-docs:
-  - title: Decision Making Under Uncertainty
-    children:
-      - title: "Robust Optimization"
-        url: /docs/robust_optimization/
-      - title: "Stochastic Programming"
-        url: /docs/stochastic_programming/
-
-  - title: Convex Optimization
-    children:
-      - title: "Conic Programming"
-        url: /docs/conic_programming/
-      - title: "Algorithms"
-        url: /docs/algorithms/
-      - title: "Convex Analysis"
-        url: /docs/convex_analysis/
-
-  - title: Statistics
-    children:
-      - title: "Bayesian Statistics"
-        url: /docs/bayesian_statistics/
+# Sidebar
+posts:
+   - title: Decision Making Under Uncertainty
+     children:
+       - title: "Robust Optimization"
+         url: /categories/robust_optimization/
+       - title: "Stochastic Programming"
+         url: /categories/stochastic_programming/
         
+   - title: Convex Optimization
+     children:
+       - title: "Conic Programming"
+         url: /categories/conic_programming/
+       - title: "Algorithms"
+         url: /categories/algorithms/
+       - title: "Convex Analysis"
+         url: /categories/convex_analysis/
