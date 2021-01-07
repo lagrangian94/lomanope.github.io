@@ -298,3 +298,10 @@ defaults:
       related: false
       sidebar:
         nav: "posts"
+
+# Math equation
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
