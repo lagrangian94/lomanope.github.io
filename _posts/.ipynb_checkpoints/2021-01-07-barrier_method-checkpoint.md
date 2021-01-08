@@ -21,16 +21,13 @@ ___
 
 > ## Problem with generalized inequalities
 
-1. Consider following problem:  
-+ 
-$$
+1. Consider following problem: $$
 \begin{align}
 \min \:&f_{0}(x)
 \\
 \text{s.t.}\: &f_{i}(x) \preceq_{K_{i}} 0,\;i=1,\cdots,m \nonumber
 \\
-&Ax=b \nonumber
-\end{align}
+&Ax=b \nonumber \end{align}
 $$
 + where $f_{0}:\mathbb{R}^{n}\rightarrow \mathbb{R}$ is convex, $f_{i} : \mathbb{R}^{n}\rightarrow \mathbb{R}^{k_{i}},\forall i$ are *$K_{i}$-convex*, and $K_{i}\subseteq \mathbb{R}^{k_{i}}$ are proper cones  
 + We assume $f_{i}$ are twice continuously differentiable, $A\in \mathbb{R}^{p \times n}$ with **rank** $A=p$, and that problem is solvable  
