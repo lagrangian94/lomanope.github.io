@@ -33,7 +33,7 @@ $$
 + We assume $f_{i}$ are twice continuously differentiable, $A\in \mathbb{R}^{p \times n}$ with **rank** $A=p$, and that problem is solvable  
 
 2. The *KKT* conditions for problem (1) is
-+ $$
+$$
 \begin{align}
 &\nabla f_{0}(x^*) + \sum_{i=1}^{m} Df_{i}(x^*)^\intercal \lambda_{i}^*+A^\intercal \nu^* = 0 \\
 &f_{i}(x^*) \preceq_{K_{i}} 0,\:\forall i \nonumber \\
@@ -101,8 +101,8 @@ $$
 ___
 > ## Central Path
 
-1. Central path is the sequence of the central points, ${x^*(t),t>0}$, which is the minimizer of following centering problem:
-+ $$
+1. Central path is the sequence of the central points, ${x^*(t),t>0}$, which is the minimizer of following centering problem:  
+$$
 \begin{align}
 \min\: &f_{0}(x)-\frac{\phi(x)}{t} \\
 \text{s.t. }&Ax=b \nonumber
@@ -116,7 +116,7 @@ $$
   + Therefore, we solve centering problems iteratively by growing $t$, until we get $\epsilon-$optimal
 + Theoretically, $t$ affects the number of iterations, however its influence get vanished when the $f_{i}(x)$ is *self-concordant* function.
   + Refer *[Boyd&Vandenberghe](https://web.stanford.edu/~boyd/cvxbook/)*
-2. Let's modify (3) to equivalent problem,
+2. Let's modify (3) to equivalent problem,  
 $$
 \begin{align}
 \min\: &tf_{0}(x)-\phi(x) \\
@@ -144,8 +144,10 @@ $$
 &t\nabla f_{0}(x) + \nabla \phi(x) + A^\intercal \nu \nonumber \\
 &=t\nabla f_{0}(x) + \sum_{i=1}^{m} Df_{i}(x)^\intercal \nabla \psi_{i}(-f_{i}(x))+A^\intercal \nu = 0
 \end{align}$$  
-3. Define $\nu^*(t)=\frac{\nu}{t}$
-+ and  $\lambda_{i}^*(t)=\nabla\psi_{i}(-f_{i}(x^\*(t)))/t$
+3. Define $$
+\begin{align} \nu^*(t)&=\frac{\nu}{t} \\
+ \lambda_{i}^*(t)&=\nabla\psi_{i}(-f_{i}(x^{*}(t)))/t \nonumber
+\end{align}$$
 4. Surprisingly, $\lambda_{i}^\*(t), \nu^\*(t)$ are dual feasible solution of original problem (1) !
 + $\lambda_{i}^\*(t) \succ_{K_{i}^*} 0$
   + Dual feasibile (Property of generalized logarithm) 
@@ -178,7 +180,7 @@ $$
 + Even if it exsits, how can we find it?
 2. Finding initial point of algorithm is itself an another optimization problem
 3. Just solve the problem:
-+ $$
+$$
 \begin{align}
 \min\:&s \\
 \text{s.t. }&f_{i}(x) \preceq_{K_{i}} se_{i},\;i=1,\cdots,m \nonumber \\
@@ -194,5 +196,66 @@ $$
 1. Number of outer loops(centering steps) required to get $\epsilon$-optimal = $\frac{\log(\bar{\theta}/(t^{(0)}\epsilon))}{\log \mu}+1(\text{initial step})$
 + for k step, directly solve $\mu^{k}t^{0}=\frac{\bar{\theta}}{\mu^{k}t^{0}}=\epsilon$ returns above result.
 2. Number of innter loop(solving (4) by newton method)? Relies on *Lipschitz constant*, *conditional number* (detail skipped)
-+ for the standard newton method, it suffices that $tf_{0}(x)-\phi(x)$, its initial sublevel set closed, inverse KKT matrix bounded, Hessian satisfiying Lipschitz condition (check the newton method)
-+ Can we get more tangible results? Yes, if the constraints are *self-concordant*
++ for the standard newton method, it suffices that $tf_{0}(x)-\phi(x)$,
+  + its initial sublevel set closed, inverse KKT matrix bounded, Hessian satisfiying Lipschitz condition (check the newton method)
++ Can we get more tangible results? Yes, if the constraints are *self concordant*
+3. In fact, $self-concordant$ barriers make time complexity of the problem bounded by **polynomial time**
+
+>## Convergence provided that $tf_{0}+\phi$ is self-concordant
+
+1. In this post, we do not describe polynomial-time solvable nature of self-concordant barrier.
++ Just remember that self-concordant barrier makes the barrier method be solvable in polynomial-time(arithmetic cost is polynomial in the size of problem)
++ What is important, is that *Conic program(LP, SOCP, QCQP, SDP)*'s barrier is self-concordant function!
+
+2. The complexity of Newton's method for closed, strictly convex, self-concordant functions is bounded by:
+$$
+\frac{f(x)-p^{*}}{\gamma}+c
+$$
++ where $\gamma=\frac{\alpha\beta(1-2\alpha)}{20-8\alpha}$, $c=\log_{2}\log_{2}(1/\epsilon)$
++ $\alpha,\beta$ are backtracking parameters
+
+3. When solving each centering problem, we use newton method. Then we have a bound as:
+$$
+\begin{equation}
+\mu tf_{0}(x^{*}(t))+\phi(x^{*}(t))-\mu tf_{0}(x^{*}(\mu t))-\phi(x^{*}(\mu t)) \leq \bar{\theta}(\mu-1-\log \mu)
+\end{equation}
+$$
++ So, the iteration of newton step in one centering problem is no more than:
+$$
+\frac{\bar{\theta}(\mu-1-\log \mu)}{\gamma}+c
+$$
+4. Therefore, total iteration of newton step for $\epsilon$-optimal solution is:
+$$
+\bigg(\frac{\log(\bar{\theta}/(t^{(0)}\epsilon))}{\log \mu}+1 \bigg)*\bigg(\frac{\bar{\theta}(\mu-1-\log \mu)}{\gamma}+c\bigg)
+$$
+
+>## Further proof
+
+1. Then, how did we get the bound from (9)?
+2. We start from generalized logarithm for the dual cone,
++ Since $\psi(u)$ is concave in u, the conjugate of convex function $-\psi(u)$ is:
+$$
+\begin{equation}
+(-\psi)^{*}(v) = \sup \limits_{u}(v^\intercal u-(-\psi(u)))=\sup \limits_{u}(v^\intercal u+\psi(u))) 
+\end{equation}
+$$  
+3. Above function is convex in v and its domain is $-K^{*}$
++ From (9), the maximzer $v^{*}= -\nabla \psi(u)$
+  + Then $$ \begin{align} 
+  \nabla \psi(u) \succ_{K^{*}}0 &\rightarrow v \in -K^{*} \\
+  \text{Define } \bar{\psi(u)}= -(-\psi)^{*}(-v)&=-\sup\limits_{u} (-v)^\intercal u+\psi(u) \nonumber \\
+  &= -(-)\inf \limits_{u} v^\intercal u -\psi(u) \nonumber
+  \\
+  &= \inf \limits_{u} v^\intercal u - \psi(u)
+  \end{align}$$
+4. From (12), we obatin the inequality
+$$
+\begin{align*}
+\bar{\psi}(v)+\psi(u) \leq v^\intercal u,\;\forall u \succ_{K} 0, v \succ_{K^{*}} 0 \\
+\bar{\psi}(v)+\psi(u) = v^\intercal u \text{ iff }v=\nabla \psi(u)
+\end{align*}
+$$
+5. $ t\lambda_{i}^{*}(t) = \nabla\psi_{i}(-f_{i}(x+))$
+6. Then $$
+\psi_{i}(-f_{i}(x))+\bar{\psi_{i}}(t\lambda_{i}^{*}(t)) = (-f_{i}(x+))^\intercal (t\lambda_{i}^{*}(t)) = \theta_{i}
+$$
