@@ -2,7 +2,7 @@
 title: "Interior Points Methods - Barrier Method"
 date: 2021-01-07 00:00:00 -0400
 category : algorithms
-permalink : /categories/algorithms/
+permalink : /categories/algorithms/barrier
 layout : single
 use_math: true
 comments: true
@@ -43,7 +43,7 @@ $$
 \end{align}
 $$  
 + where $Df_{i}(x^*) \in \mathbb{R}^{k_{i}\times n}$ is the derivative(Jacobian)
-3. Of course, directly solving KKT equations is usually hard in many problems. That's why we employ **algorithms**.
+3. Of course, directly solving KKT equations is usually hard in many problems. That's why we exploit **algorithms**.
 + If we remove the inequalities $f_{i}\preceq_{K_{i}}0$, then the problem can be solved by standard *newton method*.
   + What about removing the constraints and adding them to objective function with penalty? (Recall lagrangian paradigm)
 + Our hope : nonlinear constraints $f_{i}(x) \preceq_{K_{i}} 0$ never be violated.
@@ -312,3 +312,8 @@ $$
 \end{align}
 $$
 7. So we proved the bound
+
+# References
++ Boyd, S., Boyd, S. P., & Vandenberghe, L. (2004). Convex optimization. Cambridge university press.
++ Nesterov, Y. (2003). Introductory lectures on convex optimization: A basic course (Vol. 87). Springer Science & Business Media.
++ Lectures from "Nonlinear Programming" in POSTECH, Prof. Young Myoung Ko
