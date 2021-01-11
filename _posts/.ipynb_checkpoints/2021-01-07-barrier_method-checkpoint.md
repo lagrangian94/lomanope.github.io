@@ -153,7 +153,8 @@ $$
   + Dual feasibile (Property of generalized logarithm) 
 + Lagrangian $L(x,\lambda_{i}^\*(t),\nu^*(t)) = f_{0}(x)+\sum_{i=1}^{m}\lambda_{i}^\*(t)^\intercal f_{i}(x)+\nu^\*(t)^\intercal (Ax-b)$  
  is minimized over central point $x=x^\*(t)$
-  + This is followed by directly using the result of (5)
+  + Unconstrained convex function(lagrangian) is minimized when its gradient becomes zero 
+  + Then it is followed by directly using the result of (5)
 + Therefore, $\lambda_{i}^\*(t), \nu^\*(t)$ are one of dual feasible solution of (1)
 5. Then, lagrangian dual function
 $$
@@ -232,30 +233,82 @@ $$
 >## Further proof
 
 1. Then, how did we get the bound from (9)?
-2. We start from generalized logarithm for the dual cone,
+2. We start from generalized logarithm for the dual cone:
 + Since $\psi(u)$ is concave in u, the conjugate of convex function $-\psi(u)$ is:
 $$
 \begin{equation}
 (-\psi)^{*}(v) = \sup \limits_{u}(v^\intercal u-(-\psi(u)))=\sup \limits_{u}(v^\intercal u+\psi(u))) 
 \end{equation}
 $$  
-3. Above function is convex in v and its domain is $-K^{*}$
-+ From (9), the maximzer $v^{*}= -\nabla \psi(u)$
-  + Then $$ \begin{align} 
-  \nabla \psi(u) \succ_{K^{*}}0 &\rightarrow v \in -K^{*} \\
-  \text{Define } \bar{\psi(u)}= -(-\psi)^{*}(-v)&=-\sup\limits_{u} (-v)^\intercal u+\psi(u) \nonumber \\
++ Above function is convex in v and its domain is $-K^{*}$
+  + From (9), the maximzer $v^{*}= -\nabla \psi(u)$
+  + Then 
+  $$ 
+  \nabla \psi(u) \succ_{K^{*}}0 \rightarrow v \in -K^{*}
+  $$  
++ Therefore we define dual generalized logarithm $\bar{\psi}(u)$ :$$ \begin{align} 
+  \bar{\psi}(u)= -(-\psi)^{*}(-v)&=-\sup\limits_{u} (-v)^\intercal u+\psi(u) \nonumber 
+  \\
   &= -(-)\inf \limits_{u} v^\intercal u -\psi(u) \nonumber
   \\
   &= \inf \limits_{u} v^\intercal u - \psi(u)
   \end{align}$$
-4. From (12), we obatin the inequality
++ From (11) & *Fenchel Inequality*, we obatin below inequality
 $$
-\begin{align*}
-\bar{\psi}(v)+\psi(u) \leq v^\intercal u,\;\forall u \succ_{K} 0, v \succ_{K^{*}} 0 \\
-\bar{\psi}(v)+\psi(u) = v^\intercal u \text{ iff }v=\nabla \psi(u)
-\end{align*}
+\begin{align}
+\bar{\psi}(v)+\psi(u) &\leq v^\intercal u,\;\forall u \succ_{K} 0, v \succ_{K^{*}} 0 \\
+\bar{\psi}(v)+\psi(u) &= v^\intercal u \text{ iff }v=\nabla \psi(u) \nonumber
+\end{align}
 $$
-5. $ t\lambda_{i}^{*}(t) = \nabla\psi_{i}(-f_{i}(x+))$
-6. Then $$
-\psi_{i}(-f_{i}(x))+\bar{\psi_{i}}(t\lambda_{i}^{*}(t)) = (-f_{i}(x+))^\intercal (t\lambda_{i}^{*}(t)) = \theta_{i}
+3. We apply above results to our problem 
++ Our goal is to show that: $$ \mu tf_{0}(x^{*}(t))+\phi(x^{*}(t))-\mu tf_{0}(x^{*}(\mu t))-\phi(x^{*}(\mu t)) \leq \bar{\theta}(\mu-1-\log \mu) $$
++ For simplicity, we define $$x:=x^{*}(t), x^{+} :=x^{*}(\mu t) \\ 
+\lambda_{i}^{*}(t) := \lambda_{i}\\
+\nu^{*}(t) := \nu
+$$  
++ From (6),(12), and property of generalized logarithm, we achieve below inequality as equality:$$
+\begin{equation}
+\psi_{i}(-f_{i}(x))+\bar{\psi}_{i}(t\lambda_{i}) = -t\lambda_{i}^\intercal f_{i}(x) = \theta_{i}
+\end{equation}
 $$
+  + Because $\nabla \psi_{i}(-f_{i}(x)) = t\lambda_{i}$
++ And we get another "in"equality for x+:
+$$
+\psi_{i}(-f_{i}(x^{+}))+\bar{\psi_{i}}(\mu t \lambda_{i})\leq -\mu t \lambda_{i}^\intercal f_{i}(x^{+})
+$$
+  + Because $\nabla \psi_{i}(-f_{i}(x^{+})) \neq \mu * t\lambda_{i}$
++ Then this inequality becomes, using logarithmic homogeneity,
+$$
+\begin{equation}
+\psi_{i}(-f_{i}(x^{+}))+\bar{\psi_{i}}(t \lambda_{i})+\theta_{i}\log \mu \leq -\mu t \lambda_{i}^\intercal f_{i}(x^{+})
+\end{equation}
+$$
+4. Subtracting (13) from (14), we get
+$$
+\begin{align}
+-\psi_{i}(-f_{i}(x))+\psi_{i}(-f_{i}(x^{+}))+\theta_{i}(\log \mu) &\leq -\theta_{i}-\mu t \lambda_{i}^\intercal f_{i}(x^{+}) \nonumber 
+\\
+&(\text{summing over }i) \nonumber
+\\
+\phi(x)-\phi(x^{+})+\bar{\theta}\log \mu &\leq -\bar{\theta}-\mu t \sum_{i=1}^{m}\lambda_{i}^\intercal f_{i}(x^{+})
+\end{align}
+$$
+5. Do you remember the duality gap?
+$$
+\begin{align}
+f_{0}(x)-\bar{\theta}/t &= g(\lambda,\nu) \nonumber
+\\
+&\leq f_{0}(x^{+})+\sum_{i=1}^{m}\lambda_{i}^\intercal f_{i}(x^{+})+\nu^\intercal (Ax^{+}-b) \nonumber
+\\
+&= f_{0}(x^{+})+\sum_{i=1}^{m}\lambda_{i}^\intercal f_{i}(x^{+})
+\end{align}
+$$
+6. Multiplying (16) by $\mu t$ and adding to (15) yields
+$$
+\begin{align}
+\phi(x)-\phi(x^{+})+\bar{\theta}\log\mu+\mu t f_{0}(x)-\mu\bar{\theta} &\leq \mu t f_{0}(x^{+})-\bar{\theta} \nonumber
+\\
+\mu t f_{0}(x)+\phi(x)-\mu t f_{0}(x^{+})-\phi(x^{+}) & \leq \bar{\theta}(\mu-1-\log \mu)
+\end{align}
+$$
+7. So we proved the bound
