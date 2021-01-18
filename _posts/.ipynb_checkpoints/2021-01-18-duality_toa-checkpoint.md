@@ -49,7 +49,54 @@ $$
 
 5. When $Cons(\lambda)$ be contradictory?
 + First, set $d=0$
-+ $\Omega=">"\;\&\; e \geq 0 \Leftrightarrow \;d^\intercal x = 0 > e \geq 0$
-+ $\Omega="\geq"\;\&\; e > 0 \Leftrightarrow \;d^\intercal x = 0 \geq e > 0$
-+ Let's extend this result to $\mathcal{S}$
-6. 
++ $\mathcal{T}_{1}: \;\Omega=">"\;\&\; e \geq 0 \Leftrightarrow \;d^\intercal x = 0 > e \geq 0$  
+or,  
++ $\mathcal{T}_{2}: \;\Omega="\geq"\;\&\; e > 0 \Leftrightarrow \;d^\intercal x = 0 \geq e > 0$
+6. Let's extend this result to $\mathcal{S}$
+
+# General Theorem of Alternatives
+
+>## Theorem of Alternatives
+System $\mathcal{S}$ has no solutions if and only if either $\mathcal{T}$ is solvable
+$$\begin{align*}
+\mathcal{S}:\;\;\begin{Bmatrix} a_{i}^\intercal x &> b_{i},\;i=1,\cdots,m_{s} \\ 
+a_{i}^\intercal x &\geq b_{i},\;i=m_{s}+1,\cdots,m \end{Bmatrix}  \\
+\mathcal{T}_{1}:\;\;\begin{Bmatrix}
+\lambda &\geq 0 \\
+\sum_{i=1}^{m}\lambda_{i}a_{i} &= 0\\
+\sum_{i=1}^{m}\lambda_{i}b_{i} &\geq 0 \\
+\sum_{i=1}^{m_{s}} \lambda_{i} &> 0
+\end{Bmatrix}
+\\
+&\text{or} \\
+\mathcal{T}_{2}:\;\;\begin{Bmatrix}
+\lambda &\geq 0 \\
+\sum_{i=1}^{m} \lambda_{i}a_{i}&=0 \\
+\sum_{i=1}^{m} \lambda_{i}b_{i} &>0
+\end{Bmatrix}
+\end{align*}
+$$
++ Assume at least one of $\mathcal{T}$ is solvable. Then, the system $\mathcal{S}$ is infeasible 
++ Numerous proofs exist. To describe Duality, *Farkas Lemma* is one of the favorites.
+
+>## (Homogenous) Farkas Lemma
+A linear inequality
+$$
+\begin{equation*}
+a^\intercal x \leq 0
+\end{equation*}
+$$
+is a consequence of a system of linear inequalities
+$$
+\begin{equation*}
+a_{i}^\intercal x \leq 0,\;i=1,\cdots,m
+\end{equation*}
+$$
+**if and only if** $a$ is in the conic combination of $a_{i}$:
+$$
+\begin{align*}
+\exists \lambda_{i}\geq 0\;s.t.\; a= \sum_{i}\lambda_{i}a_{i}
+\end{align*}
+$$
+
+>## Proof of Farkas Lemma
